@@ -20,11 +20,11 @@ header {
   align-self: stretch;
 }
 
-.mobile-nav {
+.mobile-nav-toggle {
   display: none;
 }
 
-header nav.primary-nav ul {
+.primary-nav {
   margin: 0;
   display: flex;
   justify-content: flex-end;
@@ -278,12 +278,41 @@ h3 {
   height: 2rem;
 }
 
-.email span {
+.email-text {
   color: var(--alt-text-color);
   font-size: 2.25rem;
   font-weight: 600;
   line-height: 2.5rem;
   letter-spacing: -0.045rem;
+}
+
+.copy-button {
+  background: url("assets/copy.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 0;
+  padding: 0;
+  aspect-ratio: 1;
+  width: 2rem;
+
+}
+
+.button-container {
+  position: relative;
+  display: flex;
+}
+.tooltip {
+  display: none;
+  position: absolute;
+  top: -2rem;
+  left: -100%;
+  background-color: var(--tag-bg-color);
+  padding: 0.25rem 1.25rem;
+  border-radius: 0.75rem;
+}
+
+.tooltip[data-visible="true"] {
+  display: inline-block;
 }
 
 .social {
@@ -322,21 +351,45 @@ footer p {
     padding: 1rem 1rem;
   }
 
+  
   .primary-nav {
-    display: none;
+    position: fixed;
+    inset: 0 0 0 15%;
+    box-shadow: 0px 25px 25px 0px rgba(0, 0, 0, 0.15);
+    background: hsl(0 0% 100% / 0.9);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    gap: 1rem;
+    padding: 10rem 1rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+    transform: translateX(100%);
+
+    transition: transform 0.3s ease-in-out;
   }
 
-  .mobile-nav {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  .primary-nav[data-visible="true"] {
+    transform: translateX(0);
   }
 
-  .mobile-nav button {
-    background-color: transparent;
-    border: none;
+
+  .mobile-nav-toggle {
+    display: block;
+    background: url("assets/hamburger.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 0;
     cursor: pointer;
     padding: 0;
+    aspect-ratio: 1;
+    width: 2rem;
+    z-index: 100;
+  }
+
+  .mobile-nav-toggle[aria-expanded="true"] {
+    background: url("assets/close.svg");
+    background-size:cover;
+    background-repeat: no-repeat;
   }
 
 
@@ -402,7 +455,7 @@ footer p {
     height: 1.5rem;
   }
   
-  .email span {
+  .email-text {
     font-size: 1.125rem;
     line-height: 1.75rem;
   }
